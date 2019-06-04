@@ -1,68 +1,124 @@
 #include <iostream>
+#include <string.h>
+
+using namespace std;
 
 class Contact {
-    char first_name[25];
-    char last_name[25];
-    char nickname[25];
-    char login[25];
-    char postal_address[25];
-    char email_address[25];
-    char phone_number[25];
-    char birth_date[25];
-    char favorite_meal[25];
-    char underwear_color[25];
-    char darkest_secret[25];
+	public:
+	string first_name;
+	string last_name;
+	string nickname;
+	string login;
+	string postal_address;
+	string email_address;
+	string phone_number;
+	string birth_date;
+	string favorite_meal;
+	string underwear_color;
+	string darkest_secret;
 
 
-    public:
     void addData() {
-        std::cout<<"\n\tEnter First Name: ";
-        std::cin>>first_name;
+        cout<<"\nEnter First Name: ";
+        getline(cin, first_name);
 
-        std::cout<<"\n\tEnter Last Name: ";
-        std::cin>>last_name;
+        cout<<"\nEnter Last Name: ";
+        getline(cin,last_name);
 
-        std::cout<<"\n\tEnter nickname : ";
-        std::cin>>nickname;
+        cout<<"\nEnter nickname : ";
+       	getline(cin,nickname);
 
-        std::cout<<"\n\tEnter login : ";
-        std::cin>>login;
+        cout<<"\nEnter login : ";
+        getline(cin, login);
 
-        std::cout<<"\n\tEnter postal address: ";
-        std::cin>>postal_address;
+        cout<<"\nEnter postal address: ";
+        getline(cin, postal_address);
 
-        std::cout<<"\n\tEnter email address: ";
-        std::cin>>email_address;
+        cout<<"\nEnter email address: ";
+        getline(cin, email_address);
 
-        std::cout<<"\n\tEnter birth date: ";
-        std::cin>>birth_date;
+        cout<<"\nEnter birth date: ";
+        getline(cin, birth_date);
 
-        std::cout<<"\n\tEnter favorite meal: ";
-        std::cin>>favorite_meal;
+        cout<<"\nEnter favorite meal: ";
+        getline(cin, favorite_meal);
 
-        std::cout<<"\n\tEnter underwear color: ";
-        std::cin>>underwear_color;
+        cout<<"\nEnter underwear color: ";
+        getline(cin, underwear_color);
 
-         std::cout<<"\n\tEnter darkest secret: ";
-        std::cin>>darkest_secret;
+        cout<<"\nEnter darkest secret: ";
+        getline(cin,darkest_secret);
     }
 
-    void PutData(int index) {
-        std::cout<<"\n"<<index<<"|"<<first_name<<"|"<<last_name<<"|"<<nickname;
+    void listData(int index) {
+        cout<<"\n"<<index<<" | "<<first_name<<" | "<<last_name<<" | "<<nickname<< std::endl;
     }
+
+	void showDetails() {
+		cout << "First name: " << first_name << endl << "Last name: " << last_name << endl << "Nickname: "<< nickname << endl; 
+		cout << "Loging: " << login << endl << "Postal Address: "<< postal_address << endl << "Email address: "<< email_address << endl; 
+	}
 
 };
-void Input ()
-{
-    char command[25];
-    std::cout << "Enter ";
-    std::cin >> command;
-   
 
+int isEmpty(Contact phoneBook[]) {
+	int i = 0;
+	int count = 0;
+	while (i < 8) {
+		if (phoneBook[i].first_name.empty()) {
+			count++;
+		}
+		i++;
+	}
+	if(count == 8)
+		return 1;
+	else 
+		return 0;
 }
 int main(void) {
-       
-       while (1) {
-       }
-    return 0;
+    	string command;
+		int index = 0;
+		cout << "Enter Command" << endl;
+		Contact phoneBook[8];
+		int i;
+		while (1) {
+			getline(cin, command);
+			if (command.compare("EXIT") == 0)
+				break;
+			else if (command.compare("SEARCH") == 0) {
+				i = 0;
+				index = 1;
+				while (i < 8) {
+					if (!phoneBook[i].first_name.empty()) {
+						phoneBook[i].listData(i);
+					}
+					i++;
+				}
+				if (!isEmpty(phoneBook))
+					cout << "Enter index of contact" << endl;
+			}
+			else if (command.compare("ADD") == 0) {
+				i = 0;
+				index = 0;
+				while(i < 8) {
+					if (phoneBook[i].first_name.empty()) {
+						phoneBook[i].addData();
+						break;
+					}
+					i++;
+				}
+			}
+			else if (command.length() == 1 && command[0] >= '0' && command[0] <= '7' && index == 1) {
+				if (isEmpty(phoneBook)) 
+					cout << "Phonebook Empty" << endl;
+				else {
+					int i = std::atoi(command.c_str());
+					phoneBook[i].showDetails();
+				}
+			} else {
+				index = 0;
+				cout << "Invalid command" << endl;
+			}
+		}
+		return 0;
 }
