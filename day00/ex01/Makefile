@@ -1,12 +1,8 @@
-CXX = clang++
-CXXFLAGS = -Wall -Wextra -Werror
-NAME = phonebook
-SRC = phonebook.cpp
-OBJ = $(SRC:.cpp=.o)
+FLAGS = -Wall -Wextra -Werror
 
-all: $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJ)
-
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -o $@ -c $<
-	
+all:
+	clang++ phonebook.cpp  -o "phonebook" $(FLAGS)
+clean:
+	rm -f phonebook
+fclean:
+	rm -f phonebook

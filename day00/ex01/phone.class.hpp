@@ -1,9 +1,9 @@
 #ifndef PHONE_CLASS_HPP
-# define PHONE_CLASS_HPP
+#define PHONE_CLASS_HPP
 
 #include <iostream>
-#include <string.h>
 #include <iomanip>
+#include <string.h>
 
 using namespace std;
 
@@ -53,22 +53,29 @@ class Contact {
         cout<<"\nEnter darkest secret: ";
         getline(cin,darkest_secret);
     }
-    void	displayField(string field){
-        if (field.size() > 10)
-            cout << setw(9) << setfill('.') << field;
-        else
-            cout << setw(10) << right << setfill(' ') << field;
-        cout << '|';
-    }
+
     void listData(int index) {
-        cout<<index<<"|"<<first_name<<" | "<<last_name<<" | "<<nickname;
-        cout<<endl;
+        cout<< setw(10) << right << index <<'|';
+        if (first_name.length() > 9)
+            cout<< setw(10) << right << first_name.substr(0,8) << ".|";
+        else
+            cout<< setw(10) << right << first_name <<"|";
+        if (last_name.length() > 9)
+            cout<< setw(10) << right << last_name.substr(0,9) << ".|";
+        else
+            cout<< setw(10) << right << last_name <<'|';
+        if (nickname.length() > 9)
+            cout<< setw(10) << right << nickname.substr(0,9) << "." << std::endl;
+        else 
+            cout<< setw(10) << right << nickname << std::endl;
     }
 
 	void showDetails() {
 		cout << "First name: " << first_name << endl << "Last name: " << last_name << endl << "Nickname: "<< nickname << endl; 
-		cout << "Loging: " << login << endl << "Postal Address: "<< postal_address << endl << "Email address: "<< email_address << endl; 
+		cout << "Loging: " << login << endl << "Postal Address: "<< postal_address << endl << "Email address: "<< email_address << endl;
+		cout << "Phone number: " << phone_number << endl << "Birth date: "<< birth_date << endl << "favorite meal: "<< favorite_meal<< endl;
+		cout << "Underwear color: " << underwear_color << endl << "Darkest secret: "<< darkest_secret << endl;
 	}
-};
 
+};
 #endif
