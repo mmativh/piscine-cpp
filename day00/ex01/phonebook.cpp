@@ -1,68 +1,74 @@
-#include <iostream>
+#include "phone.class.hpp"
 
-class Contact {
-    char first_name[25];
-    char last_name[25];
-    char nickname[25];
-    char login[25];
-    char postal_address[25];
-    char email_address[25];
-    char phone_number[25];
-    char birth_date[25];
-    char favorite_meal[25];
-    char underwear_color[25];
-    char darkest_secret[25];
-
-
-    public:
-    void addData() {
-        std::cout<<"\n\tEnter First Name: ";
-        std::cin>>first_name;
-
-        std::cout<<"\n\tEnter Last Name: ";
-        std::cin>>last_name;
-
-        std::cout<<"\n\tEnter nickname : ";
-        std::cin>>nickname;
-
-        std::cout<<"\n\tEnter login : ";
-        std::cin>>login;
-
-        std::cout<<"\n\tEnter postal address: ";
-        std::cin>>postal_address;
-
-        std::cout<<"\n\tEnter email address: ";
-        std::cin>>email_address;
-
-        std::cout<<"\n\tEnter birth date: ";
-        std::cin>>birth_date;
-
-        std::cout<<"\n\tEnter favorite meal: ";
-        std::cin>>favorite_meal;
-
-        std::cout<<"\n\tEnter underwear color: ";
-        std::cin>>underwear_color;
-
-         std::cout<<"\n\tEnter darkest secret: ";
-        std::cin>>darkest_secret;
-    }
-
-    void PutData(int index) {
-        std::cout<<"\n"<<index<<"|"<<first_name<<"|"<<last_name<<"|"<<nickname;
-    }
-
-};
-void Input ()
-{
-    char command[25];
-    std::cout << "Enter ";
-    std::cin >> command;
-   
-
+void search(int i, Contact phoneBook[]) {
+	while (i < 8) {
+		if (!phoneBook[i].first_name.empty()) {
+			phoneBook[i].listData(i);
+		}
+		i++;
+	}
+	if (!isEmpty(phoneBook))
+		cout << "Enter index of contact" << endl;
 }
+
+void find_index(int i, Contact phoneBook[], string command) {
+	if (isEmpty(phoneBook)) 
+		cout << "Phonebook Empty" << endl;
+	else {
+		int i = std::atoi(command.c_str());
+		phoneBook[i].showDetails();
+	}
+}
+
+void add_data(int i, Contact phoneBook[]) {
+	while (i < 8) {
+		if (!phoneBook[i].first_name.empty()) {
+			phoneBook[i].listData(i);
+		}
+		i++;
+	}
+	if (!isEmpty(phoneBook))
+		cout << "Enter index of contact" << endl;
+}
+
+int isEmpty(Contact phoneBook[]) {
+	int i = 0;
+	int count = 0;
+	while (i < 8) {
+		if (phoneBook[i].first_name.empty())
+			count++;
+		i++;
+	}
+	if(count == 8)
+		return 1;
+	else 
+		return 0;
+}
+
 int main(void) {
-       
-       while (1) {
-       }
-    return 0;
+	string command;
+	int index = 0;
+	cout << "Enter Command" << endl;
+	Contact phoneBook[8];
+	int i;
+	while (1) {
+		getline(cin, command);
+		if (command.compare("EXIT") == 0)
+			break;
+		else if (command.compare("SEARCH") == 0) {
+			index = 1;
+			search(0, phoneBook);
+		}
+		else if (command.compare("ADD") == 0) {
+			index = 0;
+			add_data(0, phoneBook);
+		}
+		else if (command.length() == 1 && command[0] >= '0' && command[0] <= '7' && index == 1) {
+			find_index(0, phoneBook, command);
+		} else {
+			index = 0;
+			cout << "Invalid command" << endl;
+		}
+	}
+	return 0;
 }

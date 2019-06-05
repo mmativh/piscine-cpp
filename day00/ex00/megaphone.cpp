@@ -13,8 +13,7 @@ int main(int argc, char **argv) {
       }
         std::cout << argv[i] << std::endl;
         i++;
-    } 
-  
+    }
     return 0;
 
 }
