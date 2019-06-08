@@ -24,4 +24,4 @@ public:
 std::ostream & operator<<(std::ostream & o, Fixed const & rhs);
 
 
-#endif // FIXED_H
+#endif
